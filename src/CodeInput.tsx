@@ -1,6 +1,7 @@
 import * as React from "react";
 import {
   Platform,
+  Keyboard,
   StyleSheet,
   Text,
   TextInput,
@@ -44,6 +45,16 @@ const DialogCodeInput: React.FC<DialogCodeInputProps> = (props) => {
   const [code, setCode] = React.useState("");
   const codeDigitsArray = new Array(codeLength).fill(0);
   const emptyInputChar = " ";
+
+  React.useEffect(() => {
+    const hideKeyboard = Keyboard.addListener("keyboardDidHide", () => {
+      setContainerIsFocused(false);
+      codeRef?.current?.blur();
+    });
+
+    return () => hideKeyboard.remove();
+  }, []);
+
   const handleContainerPress = () => {
     setContainerIsFocused(true);
     codeRef?.current?.focus();
