@@ -132,7 +132,7 @@ DialogCodeInput.displayName = "DialogCodeInput";
 const buildStyles = (isDark: boolean) =>
   StyleSheet.create({
     codeContainer: {
-      width: "90%",
+      marginHorizontal: Platform.OS === 'ios' ? 16 : 8,
       flexDirection: "row",
       alignSelf: "center",
       justifyContent: "space-between",
