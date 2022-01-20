@@ -29,6 +29,7 @@ export interface DialogCodeInputProps extends TextInputProps {
 const DialogCodeInput: React.FC<DialogCodeInputProps> = (props) => {
   const {
     style,
+    code = '',
     wrapperStyle,
     digitContainerStyle,
     digitContainerFocusedStyle,
@@ -42,7 +43,6 @@ const DialogCodeInput: React.FC<DialogCodeInputProps> = (props) => {
   const [containerIsFocused, setContainerIsFocused] = React.useState(
     props.autoFocus || false
   );
-  const [code, setCode] = React.useState("");
   const codeDigitsArray = new Array(codeLength).fill(0);
   const emptyInputChar = " ";
 
@@ -60,7 +60,6 @@ const DialogCodeInput: React.FC<DialogCodeInputProps> = (props) => {
     codeRef?.current?.focus();
   };
   const onCodeChangePress = (t: string) => {
-    setCode(t);
     typeof onCodeChange === "function" && onCodeChange(t);
     if (t.length === codeLength) {
       setContainerIsFocused(false);
